@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 
 export default function StatisticsSection() {
     const [counts, setCounts] = useState({
@@ -11,12 +11,12 @@ export default function StatisticsSection() {
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef(null);
 
-    const targetCounts = {
+    const targetCounts = useMemo(() => ({
         years: 25,
         projects: 500,
         safety: 100,
         operations: 24
-    };
+    }), []);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -65,7 +65,7 @@ export default function StatisticsSection() {
         return () => {
             Object.values(intervals).forEach(interval => clearInterval(interval));
         };
-    }, [isVisible]);
+    }, [isVisible, targetCounts]);
 
     return (
         <section id="statistics" ref={sectionRef} className="py-24 bg-white">

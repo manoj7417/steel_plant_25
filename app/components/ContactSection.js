@@ -235,7 +235,7 @@ export default function ContactSection() {
                                 Thank You!
                             </h3>
                             <p className="text-gray-600 mb-6">
-                                Your message has been sent successfully. We'll get back to you within 24 hours.
+                                Your message has been sent successfully. We&apos;ll get back to you within 24 hours.
                             </p>
                             <button
                                 onClick={closeModal}
