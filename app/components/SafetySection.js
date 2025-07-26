@@ -4,7 +4,6 @@ import Image from "next/image";
 export default function SafetySection() {
     return (
         <section id="safety" className="py-24 bg-gray-50 relative overflow-hidden">
-            {/* Background Image with Parallax Effect */}
             <div className="absolute inset-0 z-0">
                 <Image
                     src="/10.jpg"
