@@ -20,7 +20,7 @@ export default function HeroSection() {
                     playsInline
                     className="w-full h-full object-cover"
                 >
-                    <source src="/sample-video.mp4" type="video/mp4" />
+                    <source src="https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/sample-video.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
             </div>
