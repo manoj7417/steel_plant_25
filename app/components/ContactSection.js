@@ -75,7 +75,7 @@ export default function ContactSection() {
                                         <h4 className="text-lg font-semibold text-gray-900">Address</h4>
                                         <p className="text-gray-600">
                                             Door No. 11-4-3/10 2nd floor<br />
-                                            Vridhi Chanbers, Rockdale layout<br />
+                                            Vridhi Chambers, Rockdale layout<br />
                                             Vishakapatanam – 530002<br />
                                             Andhra Pradesh
                                         </p>

@@ -12,9 +12,9 @@ export default function StatisticsSection() {
     const sectionRef = useRef(null);
 
     const targetCounts = useMemo(() => ({
-        years: 25,
-        projects: 500,
-        safety: 100,
+        years: 30,
+        projects: 280,
+        safety: 99,
         operations: 24
     }), []);
 
