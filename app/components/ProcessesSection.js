@@ -33,9 +33,9 @@ export default function ProcessesSection() {
         },
         {
             id: 4,
-            title: "Boiling Segregation",
+            title: "Segregation",
             description: "Advanced material segregation through controlled boiling processes and enrichment techniques for optimal material separation.",
-            feature: "Controlled boiling",
+            feature: "Optimal Material Separation",
             image: "/17.jpg",
             color: "orange"
         },

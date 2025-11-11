@@ -21,7 +21,7 @@ export default function AboutSection() {
                         <div className="flex-1">
                             <p className="text-lg text-gray-600 leading-relaxed mb-4">
                                 We at MTP are capable of deploying our execution resources within a Short Period of time.
-                                Our commitment to excellence and safety has made us a trusted partner in steel processing operations.
+                                Our commitment to excellence and safety has made us a trusted partner in steel heat processing operations.
                             </p>
                             <p className="text-lg text-gray-600 leading-relaxed">
                                 With decades of experience and cutting-edge technology, we deliver superior results while maintaining

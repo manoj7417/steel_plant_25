@@ -50,7 +50,7 @@ export default function HeroSection() {
             <div className="relative z-20 text-center text-white px-4 max-w-6xl mx-auto">
                 <div className="mb-8">
                     <h1 className="text-4xl md:text-6xl font-black mb-6 text-white leading-tight">
-                        Making Steel World Competitive
+                    Empowering the World of Steel
                     </h1>
                     <p className="text-xl md:text-2xl mb-8 text-gray-200 font-light max-w-4xl mx-auto leading-relaxed">
                         The steel plant is a lean, green, recycling machine - making new steel from recycled steel scrap.
