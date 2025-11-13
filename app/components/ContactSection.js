@@ -10,31 +10,64 @@ export default function ContactSection() {
         message: ''
     });
     const [showModal, setShowModal] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [modalType, setModalType] = useState('success'); // 'success' or 'error'
 
     const handleChange = (e) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
         });
+        // Clear error when user starts typing
+        if (error) setError('');
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission here
-        console.log('Form submitted:', formData);
-        setShowModal(true);
-        // Reset form
-        setFormData({
-            name: '',
-            email: '',
-            phone: '',
-            company: '',
-            message: ''
-        });
+        setIsLoading(true);
+        setError('');
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to send message');
+            }
+
+            // Success - show success modal
+            setModalType('success');
+            setShowModal(true);
+
+            // Reset form
+            setFormData({
+                name: '',
+                email: '',
+                phone: '',
+                company: '',
+                message: ''
+            });
+        } catch (err) {
+            // Error - show error modal
+            setError(err.message || 'An error occurred. Please try again.');
+            setModalType('error');
+            setShowModal(true);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const closeModal = () => {
         setShowModal(false);
+        setError('');
     };
 
     return (
@@ -75,7 +108,7 @@ export default function ContactSection() {
                                         <h4 className="text-lg font-semibold text-gray-900">Address</h4>
                                         <p className="text-gray-600">
                                             Door No. 11-4-3/10 2nd floor<br />
-                                            Vridhi Chanbers, Rockdale layout<br />
+                                            Vridhi Chambers, Rockdale layout<br />
                                             Vishakapatanam – 530002<br />
                                             Andhra Pradesh
                                         </p>
@@ -194,11 +227,29 @@ export default function ContactSection() {
                                     ></textarea>
                                 </div>
 
+                                {error && !showModal && (
+                                    <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                                        <p className="text-sm">{error}</p>
+                                    </div>
+                                )}
+
                                 <button
                                     type="submit"
-                                    className="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+                                    disabled={isLoading}
+                                    className={`w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg ${isLoading ? 'opacity-70 cursor-not-allowed' : ''
+                                        }`}
                                 >
-                                    Send Message
+                                    {isLoading ? (
+                                        <span className="flex items-center justify-center">
+                                            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                            Sending...
+                                        </span>
+                                    ) : (
+                                        'Send Message'
+                                    )}
                                 </button>
                             </form>
                         </div>
@@ -206,7 +257,7 @@ export default function ContactSection() {
                 </div>
             </section>
 
-            {/* Thank You Modal */}
+            {/* Success/Error Modal */}
             {showModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
                     <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative">
@@ -220,30 +271,61 @@ export default function ContactSection() {
                             </svg>
                         </button>
 
-                        {/* Success Icon */}
-                        <div className="text-center mb-6">
-                            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                </svg>
-                            </div>
-                        </div>
+                        {modalType === 'success' ? (
+                            <>
+                                {/* Success Icon */}
+                                <div className="text-center mb-6">
+                                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                </div>
 
-                        {/* Modal Content */}
-                        <div className="text-center">
-                            <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                                Thank You!
-                            </h3>
-                            <p className="text-gray-600 mb-6">
-                                Your message has been sent successfully. We&apos;ll get back to you within 24 hours.
-                            </p>
-                            <button
-                                onClick={closeModal}
-                                className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
-                            >
-                                Close
-                            </button>
-                        </div>
+                                {/* Success Modal Content */}
+                                <div className="text-center">
+                                    <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                                        Thank You!
+                                    </h3>
+                                    <p className="text-gray-600 mb-6">
+                                        Your message has been sent successfully. We&apos;ll get back to you within 24 hours. A confirmation email has been sent to your email address.
+                                    </p>
+                                    <button
+                                        onClick={closeModal}
+                                        className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
+                                    >
+                                        Close
+                                    </button>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                {/* Error Icon */}
+                                <div className="text-center mb-6">
+                                    <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                {/* Error Modal Content */}
+                                <div className="text-center">
+                                    <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                                        Error Sending Message
+                                    </h3>
+                                    <p className="text-gray-600 mb-6">
+                                        {error || 'Something went wrong. Please try again later or contact us directly at info@mtpllp.com'}
+                                    </p>
+                                    <button
+                                        onClick={closeModal}
+                                        className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
+                                    >
+                                        Close
+                                    </button>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
             )}

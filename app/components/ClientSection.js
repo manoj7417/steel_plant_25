@@ -20,14 +20,14 @@ export default function ClientSection() {
     const slides = [...clients, ...clients, ...clients];
 
     return (
-        <section id="clients" className="py-16 bg-gray-100">
+        <section id="clients" className="py-16 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
                     <h2 className="text-3xl font-bold text-gray-900 mb-4">
                         Our Trusted Partners
                     </h2>
                     <p className="text-gray-600 max-w-2xl mx-auto">
-                        Working with leading companies in the steel and industrial processing industry
+                        Working with leading companies in the steel and industrial processing industry , including all our group companies in related & similar scope of works
                     </p>
                 </div>
 

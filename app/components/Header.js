@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -100,6 +101,15 @@ export default function Header() {
                         >
                             Clients
                         </button>
+                        <Link
+                            href="/blogs"
+                            className={`font-medium transition-all duration-300 hover:scale-105 ${isScrolled
+                                ? 'text-gray-700 hover:text-orange-600'
+                                : 'text-white hover:text-orange-300 drop-shadow-md'
+                                }`}
+                        >
+                            Blog
+                        </Link>
                         <button
                             onClick={() => scrollToSection('contact')}
                             className={`font-medium transition-all duration-300 hover:scale-105 ${isScrolled
