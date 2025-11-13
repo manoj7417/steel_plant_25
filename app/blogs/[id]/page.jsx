@@ -44,13 +44,90 @@ const BlogDetailPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-gray-200 border-t-orange-600"></div>
-          <p className="text-lg text-gray-600 mt-4 font-medium">
-            Loading blog...
-          </p>
-        </div>
+      <div className="min-h-screen bg-white">
+        {/* Header Skeleton */}
+        <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
+          <nav className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-5">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-gray-200 rounded animate-pulse"></div>
+                <div className="h-5 w-48 bg-gray-200 rounded hidden sm:block animate-pulse"></div>
+              </div>
+              <div className="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
+            </div>
+          </nav>
+        </header>
+
+        {/* Main Content Skeleton */}
+        <main className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
+          {/* Article Header Skeleton */}
+          <header className="pt-16 pb-12">
+            {/* Category Skeleton */}
+            <div className="mb-6">
+              <div className="h-6 w-24 bg-gray-200 rounded-full animate-pulse"></div>
+            </div>
+
+            {/* Title Skeleton */}
+            <div className="space-y-4 mb-10">
+              <div className="h-12 w-full bg-gray-200 rounded animate-pulse"></div>
+              <div className="h-12 w-5/6 bg-gray-200 rounded animate-pulse"></div>
+              <div className="h-12 w-4/6 bg-gray-200 rounded animate-pulse"></div>
+            </div>
+
+            {/* Author & Meta Skeleton */}
+            <div className="flex flex-wrap items-center gap-6 pb-10 border-b border-gray-200">
+              <div className="flex items-center space-x-4">
+                <div className="w-14 h-14 bg-gray-200 rounded-full animate-pulse"></div>
+                <div className="space-y-2">
+                  <div className="h-5 w-32 bg-gray-200 rounded animate-pulse"></div>
+                  <div className="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
+                </div>
+              </div>
+              <div className="h-4 w-20 bg-gray-200 rounded animate-pulse"></div>
+            </div>
+          </header>
+
+          {/* Featured Image Skeleton */}
+          <div className="mb-16 -mx-6 sm:-mx-8 lg:-mx-12">
+            <div className="relative w-full aspect-[16/10] bg-gray-200 animate-pulse"></div>
+          </div>
+
+          {/* Article Content Skeleton */}
+          <article className="pb-20">
+            {/* Short Description Skeleton */}
+            <div className="mb-12 space-y-3">
+              <div className="h-8 w-full bg-gray-200 rounded animate-pulse"></div>
+              <div className="h-8 w-5/6 bg-gray-200 rounded animate-pulse"></div>
+              <div className="h-8 w-4/6 bg-gray-200 rounded animate-pulse"></div>
+            </div>
+
+            {/* Content Skeleton */}
+            <div className="space-y-6">
+              {[...Array(8)].map((_, index) => (
+                <div key={index} className="space-y-2">
+                  <div className="h-6 w-full bg-gray-200 rounded animate-pulse"></div>
+                  <div className="h-6 w-full bg-gray-200 rounded animate-pulse"></div>
+                  <div className="h-6 w-3/4 bg-gray-200 rounded animate-pulse"></div>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA Skeleton */}
+            <div className="mt-20 pt-12 border-t border-gray-200">
+              <div className="bg-gray-100 rounded-lg p-8 animate-pulse">
+                <div className="h-8 w-64 bg-gray-200 rounded mb-3"></div>
+                <div className="h-5 w-full bg-gray-200 rounded mb-2"></div>
+                <div className="h-5 w-3/4 bg-gray-200 rounded mb-6"></div>
+                <div className="h-12 w-32 bg-gray-200 rounded"></div>
+              </div>
+            </div>
+
+            {/* Navigation Skeleton */}
+            <div className="mt-16 pt-8 border-t border-gray-200">
+              <div className="h-5 w-32 bg-gray-200 rounded animate-pulse"></div>
+            </div>
+          </article>
+        </main>
       </div>
     );
   }

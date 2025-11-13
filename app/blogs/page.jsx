@@ -160,11 +160,48 @@ const BlogListingPage = () => {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           {loading ? (
-            <div className="text-center py-20">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-gray-200 border-t-orange-600"></div>
-              <p className="text-lg text-gray-600 mt-4 font-medium">
-                Loading blogs...
-              </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[...Array(6)].map((_, index) => (
+                <div
+                  key={index}
+                  className="h-full flex flex-col bg-white border border-gray-200 rounded-lg overflow-hidden animate-pulse"
+                >
+                  {/* Image Skeleton */}
+                  <div className="relative w-full aspect-[16/10] bg-gray-200"></div>
+
+                  {/* Content Skeleton */}
+                  <div className="flex-1 flex flex-col p-6">
+                    {/* Date & Read Time Skeleton */}
+                    <div className="flex items-center space-x-2 mb-4">
+                      <div className="h-3 w-24 bg-gray-200 rounded"></div>
+                      <div className="h-3 w-1 bg-gray-200 rounded"></div>
+                      <div className="h-3 w-16 bg-gray-200 rounded"></div>
+                    </div>
+
+                    {/* Title Skeleton */}
+                    <div className="space-y-2 mb-3">
+                      <div className="h-6 w-full bg-gray-200 rounded"></div>
+                      <div className="h-6 w-3/4 bg-gray-200 rounded"></div>
+                    </div>
+
+                    {/* Excerpt Skeleton */}
+                    <div className="space-y-2 mb-6 flex-1">
+                      <div className="h-4 w-full bg-gray-200 rounded"></div>
+                      <div className="h-4 w-full bg-gray-200 rounded"></div>
+                      <div className="h-4 w-5/6 bg-gray-200 rounded"></div>
+                    </div>
+
+                    {/* Footer Skeleton */}
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
+                        <div className="h-4 w-24 bg-gray-200 rounded"></div>
+                      </div>
+                      <div className="h-4 w-12 bg-gray-200 rounded"></div>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           ) : error ? (
             <div className="text-center py-20">
