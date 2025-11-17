@@ -16,7 +16,7 @@ export default function Footer() {
                     <div>
                         <h3 className="text-2xl font-bold text-white mb-4">Metal Traders & Processing Co.</h3>
                         <p className="text-gray-300 mb-4">Advanced iron and steel processing operations with cutting-edge technology and comprehensive safety protocols.</p>
-                        <div className="flex space-x-4">
+                        {/* <div className="flex space-x-4">
                             <a
                                 href="https://twitter.com"
                                 className="text-gray-400 hover:text-white transition-colors"
@@ -41,7 +41,7 @@ export default function Footer() {
                             >
                                 <FaLinkedin className="w-6 h-6" />
                             </a>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div>
