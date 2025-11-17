@@ -17,7 +17,20 @@ async function checkAuth() {
 // GET - Fetch all blogs or a specific blog by ID
 export async function GET(request) {
   try {
-    await connectDB();
+    // Connect to MongoDB with better error handling
+    try {
+      await connectDB();
+    } catch (dbError) {
+      console.error('MongoDB connection error:', dbError);
+      return NextResponse.json(
+        { 
+          error: 'Database connection failed',
+          details: process.env.NODE_ENV === 'development' ? dbError.message : 'Please check your database configuration'
+        },
+        { status: 500 }
+      );
+    }
+
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
 
@@ -46,6 +59,8 @@ export async function GET(request) {
       return blogObj;
     });
 
+    console.log(`Fetched ${blogsWithId.length} blogs from database`);
+
     const response = NextResponse.json(blogsWithId);
     // Prevent caching to ensure fresh data
     response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
@@ -54,8 +69,12 @@ export async function GET(request) {
     return response;
   } catch (error) {
     console.error('Error in GET /api/blogs:', error);
+    console.error('Error stack:', error.stack);
     return NextResponse.json(
-      { error: 'Failed to fetch blogs' },
+      { 
+        error: 'Failed to fetch blogs',
+        details: process.env.NODE_ENV === 'development' ? error.message : 'An error occurred while fetching blogs'
+      },
       { status: 500 }
     );
   }

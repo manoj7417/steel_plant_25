@@ -14,23 +14,33 @@ const BlogListingPage = () => {
   const fetchBlogs = async () => {
     try {
       setLoading(true);
+      setError(null);
       // Add cache: 'no-store' to prevent caching and always get fresh data
       // Add timestamp to force fresh fetch
       const response = await fetch(`/api/blogs?t=${Date.now()}`, {
         cache: "no-store",
         next: { revalidate: 0 },
       });
-      if (!response.ok) {
-        throw new Error("Failed to fetch blogs");
-      }
+      
       const data = await response.json();
+      
+      if (!response.ok) {
+        // Handle API errors
+        const errorMessage = data.error || "Failed to fetch blogs";
+        const errorDetails = data.details ? `: ${data.details}` : "";
+        throw new Error(`${errorMessage}${errorDetails}`);
+      }
+      
       // Data is already sorted by createdAt from the API
       const sortedData = Array.isArray(data) ? data : [];
       setBlogPosts(sortedData);
-      setError(null);
+      
+      if (sortedData.length === 0) {
+        console.log("No blogs found in database");
+      }
     } catch (err) {
       console.error("Error fetching blogs:", err);
-      setError("Failed to load blogs. Please try again later.");
+      setError(err.message || "Failed to load blogs. Please try again later.");
     } finally {
       setLoading(false);
     }
