@@ -42,7 +42,7 @@ export default function Header() {
                             className="w-14 h-auto"
                         />
                         <span className={`text-2xl font-bold transition-colors duration-500 ${isScrolled ? 'text-gray-800' : 'text-white drop-shadow-lg'}`}>
-                            Metal Traders & Processing Co.
+                            Metal Traders & Processing
                         </span>
                     </div>
 
