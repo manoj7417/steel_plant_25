@@ -35,11 +35,11 @@ export default function Header() {
                 <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
                         <Image
-                            src="/1-removebg.png"
+                            src="/new-logo-bg.png"
                             alt="Steel Plant Logo"
                             width={40}
                             height={40}
-                            className="w-10 h-10"
+                            className="w-14 h-auto"
                         />
                         <span className={`text-2xl font-bold transition-colors duration-500 ${isScrolled ? 'text-gray-800' : 'text-white drop-shadow-lg'}`}>
                             Metal Traders & Processing Co.
